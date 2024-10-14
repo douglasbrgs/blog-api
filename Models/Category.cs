@@ -8,4 +8,4 @@ namespace Blog.Models
 
         public IList<Post> Posts { get; set; }
     }
-}
+} 
