@@ -2,6 +2,7 @@
 using Blog.Extensions;
 using Blog.Models;
 using Blog.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,6 +47,7 @@ namespace Blog.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost("v1/categories")]
         public async Task<IActionResult> PostAsync(
             [FromBody] EditorCategoryViewModel model,
@@ -80,6 +82,7 @@ namespace Blog.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut("v1/categories/{id:int}")]
         public async Task<IActionResult> PutAsync(
             [FromRoute] int id,
@@ -112,6 +115,7 @@ namespace Blog.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("v1/categories/{id:int}")]
         public async Task<IActionResult> DeleteAsync(
             [FromRoute] int id,
