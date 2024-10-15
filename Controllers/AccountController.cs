@@ -54,11 +54,41 @@ namespace Blog.Controllers
         }
 
         [HttpPost("v1/accounts/login")]
-        public IActionResult Login([FromServices] TokenService tokenService)
+        public async Task<IActionResult> LoginAsync(
+            [FromBody] LoginViewModel model,
+            [FromServices] BlogDataContext context,
+            [FromServices] TokenService tokenService)
         {
-            var token = tokenService.GenerateToken(null);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new ResultViewModel<string>(ModelState.GetErrors()));
+            }
 
-            return Ok(token);
+            var user = await context.Users
+                .AsNoTracking()
+                .Include(x => x.Roles)
+                .FirstOrDefaultAsync(x => x.Email == model.Email);
+
+            if (user == null)
+            {
+                return StatusCode(401, new ResultViewModel<string>("Usuário ou senha inválidos"));
+            }
+
+            if (!PasswordHasher.Verify(user.PasswordHash, model.Password))
+            {
+                return StatusCode(401, new ResultViewModel<string>("Usuário ou senha inválidos"));
+            }
+
+            try
+            {
+                var token = tokenService.GenerateToken(user);
+
+                return Ok(new ResultViewModel<string>(token, null));
+            }
+            catch
+            {
+                return StatusCode(500, new ResultViewModel<string>("Falha interna do servidor"));
+            }
         }
     }
 }
