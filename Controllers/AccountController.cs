@@ -35,7 +35,7 @@ namespace Blog.Controllers
             try
             {
                 await context.Users.AddAsync(user);
-                await context.SaveChangesAsync();
+                //await context.SaveChangesAsync();
 
                 return Ok(new ResultViewModel<dynamic>(new
                 {
