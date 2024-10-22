@@ -45,8 +45,8 @@ namespace Blog.Data.Mappings
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(255);
 
-            builder.Property(x => x.Github)
-                .IsRequired(false);
+            //builder.Property(x => x.Github)
+            //    .IsRequired(false);
 
             builder.Property(x => x.Slug)
                 .IsRequired()

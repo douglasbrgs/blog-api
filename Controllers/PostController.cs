@@ -1,6 +1,7 @@
 ﻿using Blog.Data;
 using Blog.ViewModels.Categories;
 using Blog.ViewModels.Posts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace Blog.Controllers
 {
     public class PostController : ControllerBase
     {
+        [Authorize]
         [HttpGet("v1/posts")]
         public async Task<IActionResult> GetAsync(
             [FromServices] BlogDataContext context,
