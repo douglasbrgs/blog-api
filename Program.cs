@@ -22,6 +22,11 @@ app.UseStaticFiles();
 app.UseResponseCompression();
 app.MapControllers();
 
+if (app.Environment.IsDevelopment())
+{
+    Console.WriteLine("Estou no ambiente de desenvolvimento!");
+}
+
 app.Run();
 
 void LoadConfiguration(WebApplication app)
