@@ -61,6 +61,7 @@ void ConfigureMvc(WebApplicationBuilder builder)
     builder.Services.AddResponseCompression(options =>
     {
         options.Providers.Add<GzipCompressionProvider>();
+        options.EnableForHttps = true;
     });
 
     builder.Services.Configure<GzipCompressionProviderOptions>(options =>
