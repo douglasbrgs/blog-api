@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Migrations
 {
     [DbContext(typeof(BlogDataContext))]
-    [Migration("20241015142828_UserGithub")]
-    partial class UserGithub
+    [Migration("20241108192101_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,9 +161,6 @@ namespace Blog.Migrations
                         .HasMaxLength(160)
                         .HasColumnType("VARCHAR(160)")
                         .HasColumnName("Email");
-
-                    b.Property<string>("Github")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");

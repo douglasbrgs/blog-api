@@ -107,7 +107,7 @@ namespace Blog.Controllers
             [FromBody] UploadImageViewModel model,
             [FromServices] BlogDataContext context)
         {
-            var fileName = $"{Guid.NewGuid().ToString()}.jpg";
+            var fileName = $"{Guid.NewGuid()}.jpg";
             var data = new Regex(@"^data:image\/[a-z]+;base64,").Replace(model.Base64Image, "");
             var bytes = Convert.FromBase64String(data);
 
@@ -120,7 +120,8 @@ namespace Blog.Controllers
                 return StatusCode(500, new ResultViewModel<string>("Falha interna no servidor"));
             }
 
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Email == User.Identity.Name);
+            var email = User.Identity?.Name;
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Email == email);
             if (user == null)
             {
                 return NotFound(new ResultViewModel<string>("Usuário não encontrado"));

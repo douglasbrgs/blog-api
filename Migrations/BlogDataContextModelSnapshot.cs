@@ -160,9 +160,6 @@ namespace Blog.Migrations
                         .HasColumnType("VARCHAR(160)")
                         .HasColumnName("Email");
 
-                    b.Property<string>("Github")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 

@@ -49,7 +49,7 @@ namespace Blog.Controllers
 
                 return Ok(new ResultViewModel<Category>(category));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, new ResultViewModel<Category>("Falha interna no servidor"));
             }
@@ -68,7 +68,7 @@ namespace Blog.Controllers
                     return BadRequest(new ResultViewModel<Category>(ModelState.GetErrors()));
                 }
 
-                Category category = new Category
+                var category = new Category
                 {
                     Id = 0,
                     Name = model.Name,
@@ -80,7 +80,7 @@ namespace Blog.Controllers
 
                 return Created($"v1/categories{category.Id}", new ResultViewModel<Category>(category));
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, new ResultViewModel<Category>("Não foi possível incluir a categoria"));
             }
@@ -113,7 +113,7 @@ namespace Blog.Controllers
 
                 return Ok(new ResultViewModel<Category>(category));
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, new ResultViewModel<Category>("Não foi possível alterar a categoria"));
             }
@@ -142,7 +142,7 @@ namespace Blog.Controllers
 
                 return Ok(category);
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
                 return StatusCode(500, new ResultViewModel<Category>("Não foi possível excluir a categoria"));
             }
