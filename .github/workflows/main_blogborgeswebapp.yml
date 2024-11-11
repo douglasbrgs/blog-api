@@ -27,7 +27,7 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
-       - name: Update database
+      - name: Update database
         run: dotnet ef database update
 
       - name: dotnet publish
