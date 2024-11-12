@@ -28,9 +28,9 @@ namespace Blog.Controllers
 
                 return Ok(new ResultViewModel<List<Category>>(categories));
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500, new ResultViewModel<List<Category>>("Falha interna no servidor"));
+                return StatusCode(500, new ResultViewModel<List<Category>>($"Falha interna no servidor: {ex.Message}"));
             }
         }
 
